@@ -88,3 +88,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+ARMVCrypto/ARMVCrypto/Assets.xcassets/.DS_Store
+ARMVCrypto/ARMVCrypto/Assets.xcassets/.DS_Store
+ARMVCrypto/ARMVCrypto/Assets.xcassets/Images/.DS_Store
