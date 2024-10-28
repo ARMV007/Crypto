@@ -44,7 +44,7 @@ extension CoinRowView {
                 .frame(minWidth: 30)
             Circle()
                 .frame(width: 30, height: 30)
-            Text(coin.symbol)
+            Text(coin.symbol.uppercased())
                 .font(.headline)
                 .padding(.leading, 6)
                 .foregroundStyle(.cryptoAccent)
