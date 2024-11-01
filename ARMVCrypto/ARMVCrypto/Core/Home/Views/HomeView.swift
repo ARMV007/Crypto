@@ -17,9 +17,8 @@ struct HomeView: View {
             Color.cryptoBackground.ignoresSafeArea()
             VStack {
                 homeHeader
-                
+                HomeStatView(showPortfolio: $showPortfolio)
                 SearchBarView(searchText: $viewModel.searchText)
-                
                 columnTitles
                 
                 if !showPortfolio {
