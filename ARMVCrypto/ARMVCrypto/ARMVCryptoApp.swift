@@ -11,6 +11,11 @@ import SwiftUI
 struct ARMVCryptoApp: App {
     @StateObject private var viewModel = HomeViewModel()
     
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor(Color.cryptoAccent)]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor(Color.cryptoAccent)]
+    }
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
