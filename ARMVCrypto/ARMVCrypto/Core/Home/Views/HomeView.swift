@@ -90,6 +90,11 @@ extension HomeView {
             }
         }
         .listStyle(.plain)
+        .refreshable {
+            if !viewModel.isLoading {
+                viewModel.reloadData()
+            }
+        }
     }
     
     private var portfolioCoinsList: some View {
@@ -100,6 +105,11 @@ extension HomeView {
             }
         }
         .listStyle(.plain)
+        .refreshable {
+            if !viewModel.isLoading {
+                viewModel.reloadData()
+            }
+        }
     }
     
     private var columnTitles: some View {
