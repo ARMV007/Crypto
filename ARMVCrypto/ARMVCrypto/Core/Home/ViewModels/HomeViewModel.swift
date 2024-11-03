@@ -17,6 +17,7 @@ class HomeViewModel: ObservableObject {
     
     private let dataService = CoinDataService()
     private let marketDataSerive = MarketDataService()
+    private let portfolioDataService = PortfolioDataService()
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -41,7 +42,46 @@ class HomeViewModel: ObservableObject {
                 self?.statistics = returnedStats
             }
             .store(in: &cancellables)
+        
+        // update Portfolio data
+        $allCoins
+            .combineLatest(portfolioDataService.$savedEntities)
+            .map { (coins: [CoinModel], entities: [PortfolioEntity]) -> [CoinModel] in
+                coins
+                    .compactMap { (coin) -> CoinModel? in
+                        guard let entity = entities.first(where: { $0.coinID == coin.id }) else {
+                            return nil
+                        }
+                        return coin.updateHoldings(amount: entity.amount)
+                    }
+            }
+            .sink { [weak self] (returnedValues) in
+                self?.portfolioCoins = returnedValues
+            }
+            .store(in: &cancellables)
     }
+    
+    func updatePortfolio(coin: CoinModel, amount: Double) {
+        portfolioDataService.updatePorfolio(coin: coin, amount: amount)
+    }
+    
+//
+//    private func getPortfolio(coins: [CoinModel], entities: [PortfolioEntity]) -> [CoinModel] {
+//        
+//        coins
+//            .compactMap { (coin) -> CoinModel? in
+//                guard let entity = entities.first(where: { $0.coinID == coin.id }) else {
+//                    return nil
+//                }
+//                return coin.updateHoldings(amount: entity.amount)
+//            }
+//        
+//        return coins.filter { coin in
+//            entities.contains { entity in
+//                entity.coinID == coin.id
+//            }
+//        }
+//    }
     
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
         guard !text.isEmpty else {
