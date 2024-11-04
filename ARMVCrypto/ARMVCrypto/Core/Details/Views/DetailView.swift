@@ -22,7 +22,7 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Text("")
+                Text("Chart")
                     .frame(height: 150)
                 overviewTitle
                 Divider()
@@ -64,7 +64,7 @@ extension DetailView {
     private var overviewGrid: some View {
         LazyVGrid(
             columns: columns,
-            alignment: .leading,
+            alignment: .center,
             spacing: spacing,
             pinnedViews: [], content: {
                 ForEach(vm.overviewStatistic) { stat in
@@ -76,7 +76,7 @@ extension DetailView {
     private var additonalDetialsGrid: some View {
         LazyVGrid(
             columns: columns,
-            alignment: .leading,
+            alignment: .center,
             spacing: spacing,
             pinnedViews: [], content: {
                 ForEach(vm.additionalStatistic) { stat in
