@@ -36,6 +36,7 @@ struct DetailView: View {
             }
         }
         .navigationTitle(vm.coin.name)
+        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 navigationBarTrailingItem

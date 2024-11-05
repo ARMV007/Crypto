@@ -22,6 +22,8 @@ struct ARMVCryptoApp: App {
                 HomeView()
                     .toolbar(.hidden)
             }
-            .environmentObject(viewModel)        }
+            .environmentObject(viewModel)
+            .tint(.cryptoAccent)
+        }
     }
 }
