@@ -22,18 +22,25 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Text("Chart")
-                    .frame(height: 150)
-                overviewTitle
-                Divider()
-                overviewGrid
-                additionalTitle
-                Divider()
-                additonalDetialsGrid
+                ChartView(coin: vm.coin)
+                    .padding(.vertical)
+                VStack(spacing: 20) {
+                    overviewTitle
+                    Divider()
+                    overviewGrid
+                    additionalTitle
+                    Divider()
+                    additonalDetialsGrid
+                }
+                .padding()
             }
-            .padding()
         }
         .navigationTitle(vm.coin.name)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                navigationBarTrailingItem
+            }
+        }
        
     }
 }
@@ -45,6 +52,17 @@ struct DetailView: View {
 }
 
 extension DetailView {
+    
+    private var navigationBarTrailingItem: some View {
+        HStack {
+            Text(vm.coin.symbol.uppercased())
+                .font(.headline)
+                .foregroundStyle(.cryptoSecondaryText)
+            CoinImageView(coin: vm.coin)
+                .frame(width: 25, height: 25)
+        }
+    }
+    
     private var overviewTitle: some View {
         Text("Overview")
             .font(.title)
@@ -64,7 +82,7 @@ extension DetailView {
     private var overviewGrid: some View {
         LazyVGrid(
             columns: columns,
-            alignment: .center,
+            alignment: .leading,
             spacing: spacing,
             pinnedViews: [], content: {
                 ForEach(vm.overviewStatistic) { stat in
@@ -76,7 +94,7 @@ extension DetailView {
     private var additonalDetialsGrid: some View {
         LazyVGrid(
             columns: columns,
-            alignment: .center,
+            alignment: .leading,
             spacing: spacing,
             pinnedViews: [], content: {
                 ForEach(vm.additionalStatistic) { stat in

@@ -10,7 +10,7 @@ import SwiftUI
 struct StatisticView: View {
     let stat: Statistic
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(stat.title)
                 .font(.caption)
                 .foregroundStyle(.cryptoSecondaryText)
