@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct ARMVCryptoApp: App {
     @StateObject private var viewModel = HomeViewModel()
+    @State private var showLaunchView: Bool = true
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor(Color.cryptoAccent)]
@@ -18,12 +19,26 @@ struct ARMVCryptoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                HomeView()
-                    .toolbar(.hidden)
+            ZStack {
+                NavigationStack {
+                    HomeView()
+                        .toolbar(.hidden)
+                }
+                .environmentObject(viewModel)
+                .tint(.cryptoAccent)
+                
+                ZStack {
+                    if showLaunchView {
+                        LaunchView(showlaunchView: $showLaunchView)
+                            .transition(.move(edge: .leading))
+                    }
+                }
+                .zIndex(2.0)
+                
+                
             }
-            .environmentObject(viewModel)
-            .tint(.cryptoAccent)
+            
+            
         }
     }
 }
