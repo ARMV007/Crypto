@@ -11,13 +11,22 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationView {
-            List {
-                aboutSection
-                coingeckoSection
-                applicationSection
+            ZStack {
+                Color.cryptoBackground
+                    .ignoresSafeArea()
+                
+                List {
+                    aboutSection
+                        .listRowBackground(Color.clear)
+                    coingeckoSection
+                        .listRowBackground(Color.clear)
+                    applicationSection
+                        .listRowBackground(Color.clear)
+                }
+                .font(.headline)
+                .listStyle(GroupedListStyle())
+                .scrollContentBackground(.hidden)
             }
-            .font(.headline)
-            .listStyle(GroupedListStyle())
             .navigationTitle("Settings")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

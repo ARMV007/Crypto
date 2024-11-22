@@ -28,7 +28,7 @@ struct LaunchView: View {
                 if showLoadingText {
                     
                     HStack(spacing: 0) {
-                        ForEach(loadingText.indices) { index in
+                        ForEach(loadingText.indices, id: \.self) { index in
                             Text(loadingText[index])
                                 .font(.headline)
                                 .fontWeight(.heavy)
@@ -52,7 +52,6 @@ struct LaunchView: View {
                 if counter == lastIndex {
                     counter = 0
                     loops += 1
-                    
                     if loops >= 2 {
                         showlaunchView = false
                     }

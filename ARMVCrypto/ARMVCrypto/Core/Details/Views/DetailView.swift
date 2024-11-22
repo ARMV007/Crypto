@@ -38,6 +38,7 @@ struct DetailView: View {
                 .padding()
             }
         }
+        .background(Color.cryptoBackground.ignoresSafeArea())
         .navigationTitle(vm.coin.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {

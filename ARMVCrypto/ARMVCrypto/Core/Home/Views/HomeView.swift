@@ -33,7 +33,13 @@ struct HomeView: View {
                 }
                 
                 if showPortfolio {
-                    portfolioCoinsList
+                    ZStack(alignment: .top) {
+                        if viewModel.portfolioCoins.isEmpty && viewModel.searchText.isEmpty {
+                            portfolioEmptyText
+                        } else {
+                            portfolioCoinsList
+                        }
+                    }
                         .transition(.move(edge: .trailing))
                 }
                
@@ -104,6 +110,7 @@ extension HomeView {
                     .onTapGesture {
                         segue(coin: coin)
                     }
+                    .listRowBackground(Color.cryptoBackground)
             }
         }
         .listStyle(.plain)
@@ -114,6 +121,15 @@ extension HomeView {
         }
     }
     
+    private var portfolioEmptyText: some View {
+        Text("You haven't added any coins to your portfolio yet! Click + icon to get started 🧐")
+            .font(.callout)
+            .fontWeight(.medium)
+            .foregroundStyle(.cryptoAccent)
+            .multilineTextAlignment(.center)
+            .padding(50)
+    }
+    
     private var portfolioCoinsList: some View {
         List {
             ForEach(viewModel.portfolioCoins) { coin in
@@ -122,6 +138,7 @@ extension HomeView {
                     .onTapGesture {
                         segue(coin: coin)
                     }
+                    .listRowBackground(Color.cryptoBackground)
             }
         }
         .listStyle(.plain)
